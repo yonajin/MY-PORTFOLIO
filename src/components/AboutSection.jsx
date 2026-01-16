@@ -15,7 +15,7 @@ export const AboutSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-1 gap-12 items-center mb-30">
         <div className="space-y-6">
           {" "}
-          <div className="ml-135">
+          <div className="flex justify-center">
             <TiltedCard
               imageSrc="./src/ako.png"
               altText="Fiona Gene"
@@ -49,13 +49,6 @@ export const AboutSection = () => {
               <a href="#contact" className="cosmic-button">
                 {" "}
                 Get In Touch
-              </a>
-
-              <a
-                href=""
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-              >
-                Download CV
               </a>
             </div>
           </div>

@@ -33,7 +33,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Arrow at the bottom */}
-        <div className="absolute mt-65 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+        <div className="absolute mt-50 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
           <span className="text-sm text-muted-foreground mb-2">Scroll</span>
           <ArrowDown className="h-5 w-5 text-primary" />
         </div>

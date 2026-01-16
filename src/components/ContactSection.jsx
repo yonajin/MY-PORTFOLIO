@@ -66,7 +66,7 @@ export const ContactSection = () => {
               <div className="flex space-x-4 justify-center">
                 <div className="hover:text-primary transition-colors">
                   <a
-                    href="https://www.facebook.com/fiona.gene.basa.2025"
+                    href="https://www.facebook.com/fionagenebasa"
                     target="_blank"
                   >
                     <Facebook />
