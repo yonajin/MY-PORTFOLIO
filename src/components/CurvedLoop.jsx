@@ -1,13 +1,12 @@
 import { useRef, useEffect, useState, useMemo, useId } from 'react';
-import './CurvedLoop.css';
 
 const CurvedLoop = ({
   marqueeText = '',
-  speed = 2,
+  speed = 1,
   className,
   curveAmount = 400,
   direction = 'left',
-  interactive = true
+  interactive = false
 }) => {
   const text = useMemo(() => {
     const hasTrailing = /\s|\u00A0$/.test(marqueeText);
@@ -57,11 +56,9 @@ const CurvedLoop = ({
         const delta = dirRef.current === 'right' ? speed : -speed;
         const currentOffset = parseFloat(textPathRef.current.getAttribute('startOffset') || '0');
         let newOffset = currentOffset + delta;
-
         const wrapPoint = spacing;
         if (newOffset <= -wrapPoint) newOffset += wrapPoint;
         if (newOffset > 0) newOffset -= wrapPoint;
-
         textPathRef.current.setAttribute('startOffset', newOffset + 'px');
         setOffset(newOffset);
       }
@@ -84,14 +81,11 @@ const CurvedLoop = ({
     const dx = e.clientX - lastXRef.current;
     lastXRef.current = e.clientX;
     velRef.current = dx;
-
     const currentOffset = parseFloat(textPathRef.current.getAttribute('startOffset') || '0');
     let newOffset = currentOffset + dx;
-
     const wrapPoint = spacing;
     if (newOffset <= -wrapPoint) newOffset += wrapPoint;
     if (newOffset > 0) newOffset -= wrapPoint;
-
     textPathRef.current.setAttribute('startOffset', newOffset + 'px');
     setOffset(newOffset);
   };
@@ -106,14 +100,17 @@ const CurvedLoop = ({
 
   return (
     <div
-      className="curved-loop-jacket"
+      className="min-h-screen flex items-center justify-center w-full"
       style={{ visibility: ready ? 'visible' : 'hidden', cursor: cursorStyle }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerLeave={endDrag}
     >
-      <svg className="curved-loop-svg" viewBox="0 0 1440 120">
+      <svg
+        className="select-none w-full overflow-visible block aspect-[100/12] text-[6rem] font-bold uppercase leading-none"
+        viewBox="0 0 1440 120"
+      >
         <text ref={measureRef} xmlSpace="preserve" style={{ visibility: 'hidden', opacity: 0, pointerEvents: 'none' }}>
           {text}
         </text>
@@ -121,7 +118,7 @@ const CurvedLoop = ({
           <path ref={pathRef} id={pathId} d={pathD} fill="none" stroke="transparent" />
         </defs>
         {ready && (
-          <text fontWeight="bold" xmlSpace="preserve" className={className}>
+          <text xmlSpace="preserve" className={`fill-white ${className ?? ''}`}>
             <textPath ref={textPathRef} href={`#${pathId}`} startOffset={offset + 'px'} xmlSpace="preserve">
               {totalText}
             </textPath>
